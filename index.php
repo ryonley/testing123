@@ -1,9 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: festool
- * Date: 1/20/14
- * Time: 10:09 PM
- */
+try{
+    $dbh = new PDO('pgsql:host=localhost;port=5432;dbname=test;user=festool;password=butterscotch');
+}catch(PDOException $e){
 
-echo "this is only a test.  but its a good test.  so I'll test again.";
+    echo $e->getMessage();
+}
+
+
+$sql = "select * from weather";
+foreach($dbh->query($sql) as $row){
+    echo $row['city'];
+}
